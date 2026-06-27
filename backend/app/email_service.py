@@ -30,7 +30,7 @@ def send_email(to_email, subject, body):
         server = smtplib.SMTP(
             SMTP_SERVER,
             SMTP_PORT,
-            timeout=30
+            timeout=10
         )
 
         print("Connected")
@@ -53,6 +53,10 @@ def send_email(to_email, subject, body):
         )
 
         print("LOGIN SUCCESS")
+        print("SEND")
+        server.sendmail(...)
+
+        print("DONE")
 
         msg = MIMEMultipart()
 
