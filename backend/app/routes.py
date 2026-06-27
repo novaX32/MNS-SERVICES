@@ -12,19 +12,17 @@ router = APIRouter(prefix="/api", tags=["Client Services"])
 
 
 def send_emails_background(client: Client):
-    print("📨 Starting background email task")
+    print("📨 Background email started")
 
     try:
-        res = send_business_email(client)
-        print("Business email result:", res)
+        send_business_email(client)
     except Exception as e:
-        print("❌ Business email failed:", e)
+        print("Business email failed:", e)
 
     try:
-        res = send_customer_email(client)
-        print("Customer email result:", res)
+        send_customer_email(client)
     except Exception as e:
-        print("❌ Customer email failed:", e)
+        print("Customer email failed:", e)
 
 
 @router.post("/contact")
@@ -32,7 +30,7 @@ def send_emails_background(client: Client):
 def submit_contact(
     request: Request,
     client: ClientCreate,
-    background_tasks: BackgroundTasks,
+    background_tasks: BackgroundTasks,   # ✅ FIX HERE
     db: Session = Depends(get_db)
 ):
 
@@ -47,10 +45,9 @@ def submit_contact(
     db.commit()
     db.refresh(new_client)
 
-    # background task correctly used
     background_tasks.add_task(send_emails_background, new_client)
 
     return {
         "success": True,
-        "message": "Thanks for connecting. Email sent successfully. Please check your inbox."
+        "message": "Request received successfully"
     }
