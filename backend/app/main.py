@@ -9,6 +9,10 @@ from app.database import Base, engine
 
 import app.models
 from app.routes import router   # your single routes file
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.join(BASE_DIR, "..", "frontend")
 
 Base.metadata.create_all(bind=engine)
 
