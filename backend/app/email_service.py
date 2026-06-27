@@ -7,8 +7,6 @@ resend.api_key = RESEND_API_KEY
 
 def send_email(to_email, subject, body):
     try:
-        print("Sending email via Resend...")
-
         response = resend.Emails.send({
             "from": FROM_EMAIL,
             "to": [to_email],
@@ -16,20 +14,12 @@ def send_email(to_email, subject, body):
             "text": body,
         })
 
-        print("Email response:", response)
-
-        # IMPORTANT: check if email actually queued
-        if response and "id" in response:
-            print("Email successfully queued ✔")
-        else:
-            print("Warning: No email ID returned")
-
-        return response
+        print("✅ Email sent:", response)
+        return {"success": True, "response": response}
 
     except Exception as e:
-        print("EMAIL ERROR OCCURRED ❌")
-        traceback.print_exc()
-        return None
+        print("❌ EMAIL ERROR:", str(e))
+        return {"success": False, "error": str(e)}
 
 
 def send_business_email(client):

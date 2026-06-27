@@ -12,18 +12,19 @@ router = APIRouter(prefix="/api", tags=["Client Services"])
 
 
 def send_emails_background(client: Client):
-    """
-    Runs in background AFTER response is sent
-    """
-    try:
-        send_business_email(client)
-    except Exception as e:
-        print("Business email failed:", e)
+    print("📨 Starting background email task")
 
     try:
-        send_customer_email(client)
+        res = send_business_email(client)
+        print("Business email result:", res)
     except Exception as e:
-        print("Customer email failed:", e)
+        print("❌ Business email failed:", e)
+
+    try:
+        res = send_customer_email(client)
+        print("Customer email result:", res)
+    except Exception as e:
+        print("❌ Customer email failed:", e)
 
 
 @router.post("/contact")
