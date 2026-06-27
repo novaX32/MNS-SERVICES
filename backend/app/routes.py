@@ -12,6 +12,7 @@ router = APIRouter(prefix="/api", tags=["Client Services"])
 
 
 def send_emails_background(client: Client):
+    print("🔥 EMAIL TASK TRIGGERED")
     print("📨 Background email started")
 
     try:
