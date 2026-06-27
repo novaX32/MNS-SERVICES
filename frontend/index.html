@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MNS Service Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">Application Submitted Successfully!</div>
+
+    <header>
+        <h1>MNS</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#service">Service</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Client Information</h2>
+        <form id="serviceForm">
+            <div class="form-group">
+                <label for="userName">Full Name</label>
+                <input type="text" id="userName" name="username" placeholder="Enter Your Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="userPhone">Contact Number</label>
+                <input type="number" id="userPhone" name="phone" placeholder="10-digit number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="userEmail">Email Address</label>
+                <input type="email" id="userEmail" name="email" placeholder="abc@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="service">Choose a service:</label>
+                <select name="services" id="service">
+                    <option value="web-design">Web Design</option>
+                    <option value="marketing">Digital Marketing</option>
+                    <option value="ERP">ERP for college, school, Company</option>
+                </select>
+            </div>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </main>
+
+    <footer id="contact">
+        Contact us: | +91 87677 09431
+        <p>&copy; MK. Website developed by MNS.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
