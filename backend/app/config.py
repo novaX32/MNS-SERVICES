@@ -11,6 +11,7 @@ def must_get(key):
 
 
 DATABASE_URL = must_get("DATABASE_URL")
+RESEND_API_KEY = must_get("RESEND_API_KEY")
 
 SMTP_SERVER = must_get("SMTP_SERVER")   # 🔥 FIXED
 SMTP_PORT = int(must_get("SMTP_PORT"))   # 🔥 FIXED

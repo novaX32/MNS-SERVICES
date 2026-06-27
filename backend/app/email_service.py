@@ -1,84 +1,29 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import resend
 import traceback
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
-from app.config import (
-    SMTP_SERVER,
-    SMTP_PORT,
-    SMTP_EMAIL,
-    SMTP_PASSWORD,
-    BUSINESS_EMAIL
-)
+from app.config import BUSINESS_EMAIL, RESEND_API_KEY
+
+resend.api_key = RESEND_API_KEY
 
 
 def send_email(to_email, subject, body):
-
     print("=" * 60)
-    print("Starting email")
-    print("SMTP_SERVER:", SMTP_SERVER)
-    print("SMTP_PORT:", SMTP_PORT)
-    print("FROM:", SMTP_EMAIL)
+    print("Sending email via Resend")
     print("TO:", to_email)
 
     try:
-        print("Creating SMTP object...")
+        response = resend.Emails.send({
+            "from": "MNS Services <onboarding@resend.dev>",
+            "to": to_email,
+            "subject": subject,
+            "text": body,
+        })
 
-        server = smtplib.SMTP(
-            SMTP_SERVER,
-            SMTP_PORT,
-            timeout=10
-        )
-
-        print("Connected")
-
-        server.set_debuglevel(1)
-
-        print("EHLO")
-        server.ehlo()
-
-        print("STARTTLS")
-        server.starttls()
-
-        print("EHLO AGAIN")
-        server.ehlo()
-
-        print("LOGIN")
-        server.login(
-            SMTP_EMAIL,
-            SMTP_PASSWORD
-        )
-
-        print("LOGIN SUCCESS")
-        print("SEND")
-        server.sendmail(...)
-
-        print("DONE")
-
-        msg = MIMEMultipart()
-
-        msg["From"] = SMTP_EMAIL
-        msg["To"] = to_email
-        msg["Subject"] = subject
-
-        msg.attach(MIMEText(body, "plain"))
-
-        print("SENDING")
-
-        server.sendmail(
-            SMTP_EMAIL,
-            to_email,
-            msg.as_string()
-        )
-
-        print("EMAIL SENT")
-
-        server.quit()
+        print("Email sent ✔")
+        print("Response:", response)
 
     except Exception:
+        print("EMAIL ERROR:")
         traceback.print_exc()
 
 
