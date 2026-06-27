@@ -36,7 +36,6 @@ def submit_contact(
     db: Session = Depends(get_db)
 ):
 
-    # Save to DB
     new_client = Client(
         name=client.name,
         phone=client.phone,
@@ -48,7 +47,7 @@ def submit_contact(
     db.commit()
     db.refresh(new_client)
 
-    # 🔥 ADD BACKGROUND TASK (NON-BLOCKING EMAIL)
+    # background task correctly used
     background_tasks.add_task(send_emails_background, new_client)
 
     return {
