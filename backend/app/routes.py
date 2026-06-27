@@ -31,7 +31,7 @@ def send_emails_background(client: Client):
 def submit_contact(
     request: Request,
     client: ClientCreate,
-    background_tasks: BackgroundTasks,   # ✅ FIX HERE
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
 
@@ -50,5 +50,5 @@ def submit_contact(
 
     return {
         "success": True,
-        "message": "Request received successfully"
+        "message": "Thanks for connecting. Email sent successfully."
     }
