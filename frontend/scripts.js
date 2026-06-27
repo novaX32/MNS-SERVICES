@@ -43,7 +43,7 @@ document.getElementById("serviceForm").addEventListener("submit", async function
         button.disabled = true;
         button.textContent = "Sending...";
 
-        const response = await fetch("http://127.0.0.1:8000/api/contact", {
+        const response = await fetch("/api/contact", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
