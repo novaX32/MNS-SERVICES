@@ -1,34 +1,39 @@
 import resend
 import traceback
-
-from app.config import BUSINESS_EMAIL, RESEND_API_KEY
+from app.config import RESEND_API_KEY, FROM_EMAIL, BUSINESS_EMAIL
 
 resend.api_key = RESEND_API_KEY
 
 
 def send_email(to_email, subject, body):
-    print("=" * 60)
-    print("Sending email via Resend")
-    print("TO:", to_email)
-
     try:
+        print("Sending email via Resend...")
+
         response = resend.Emails.send({
-            "from": "MNS Services <onboarding@resend.dev>",
-            "to": to_email,
+            "from": FROM_EMAIL,
+            "to": [to_email],
             "subject": subject,
             "text": body,
         })
 
-        print("Email sent ✔")
-        print("Response:", response)
+        print("Email response:", response)
 
-    except Exception:
-        print("EMAIL ERROR:")
+        # IMPORTANT: check if email actually queued
+        if response and "id" in response:
+            print("Email successfully queued ✔")
+        else:
+            print("Warning: No email ID returned")
+
+        return response
+
+    except Exception as e:
+        print("EMAIL ERROR OCCURRED ❌")
         traceback.print_exc()
+        return None
 
 
 def send_business_email(client):
-    send_email(
+    return send_email(
         BUSINESS_EMAIL,
         "New Service Request",
         f"""
@@ -41,7 +46,7 @@ Service: {client.service}
 
 
 def send_customer_email(client):
-    send_email(
+    return send_email(
         client.email,
         "Thanks for contacting MNS",
         f"""
