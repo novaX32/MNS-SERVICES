@@ -7,7 +7,9 @@ resend.api_key = RESEND_API_KEY
 
 def send_email(to_email, subject, body):
     try:
-        print("Sending email via Resend...")
+        print("=== EMAIL DEBUG START ===")
+        print("FROM:", FROM_EMAIL)
+        print("TO:", to_email)
 
         response = resend.Emails.send({
             "from": FROM_EMAIL,
@@ -16,12 +18,15 @@ def send_email(to_email, subject, body):
             "text": body,
         })
 
-        print("Resend response:", response)
+        print("RESEND RESPONSE:", response)
+        print("=== EMAIL DEBUG END ===")
+
         return response
 
     except Exception as e:
-        print("EMAIL FAILED ❌")
-        print(str(e))
+        print("❌ EMAIL FULL ERROR:")
+        import traceback
+        traceback.print_exc()
         return None
 
 
