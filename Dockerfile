@@ -1,14 +1,18 @@
 FROM python:3.11
 
-WORKDIR /app/backend
+WORKDIR /app
 
-COPY backend/requirements.txt .
+# install dependencies
+COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/ .
+# copy backend + frontend
+COPY backend /app/backend
+COPY frontend /app/frontend
 
-EXPOSE 8000
-
+# set python path
 ENV PYTHONPATH=/app/backend
 
-CMD sh -c "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"
+EXPOSE 8080
+
+CMD sh -c "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"
