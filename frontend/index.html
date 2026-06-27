@@ -4,59 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MNS Service Form</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- Notification Toast -->
-    <div id="toast" class="toast">Application Submitted Successfully!</div>
+    <div id="toast" class="toast">Request Submitted Successfully!</div>
 
     <header>
-        <h1>MNS</h1>
+        <a href="#" class="logo">
+            <!-- MNS Modern Logo -->
+            <svg class="logo-svg" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#0066cc"/>
+                    <stop offset="100%" stop-color="#00b4d8"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="60" cy="60" r="48" fill="url(#grad)" fill-opacity="0.12"/>
+                <path d="M38 45 L52 82 L85 48 L72 68 L48 58 Z" fill="url(#grad)"/>
+                <circle cx="60" cy="60" r="24" stroke="#0066cc" stroke-width="9" fill="none"/>
+                <text x="60" y="72" text-anchor="middle" fill="#1e2937" font-size="22" font-weight="700" font-family="sans-serif">MNS</text>
+            </svg>
+            <span>MNS</span>
+        </a>
+        
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#service">Service</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h2>Client Information</h2>
-        <form id="serviceForm">
-            <div class="form-group">
-                <label for="userName">Full Name</label>
-                <input type="text" id="userName" name="username" placeholder="Enter Your Name" required>
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Service Request</h1>
+                <p>Fill the form below and our team will get in touch with you shortly</p>
             </div>
+            
+            <div class="form-body">
+                <h2>Client Information</h2>
+                <p class="subtitle">Please provide your details</p>
+                
+                <form id="serviceForm">
+                    <div class="form-group">
+                        <label for="userName" class="required">Full Name</label>
+                        <input type="text" id="userName" name="username" placeholder="Enter Your Name" required>
+                    </div>
 
-            <div class="form-group">
-                <label for="userPhone">Contact Number</label>
-                <input type="number" id="userPhone" name="phone" placeholder="10-digit number" required>
+                    <div class="form-group">
+                        <label for="userPhone" class="required">Contact Number</label>
+                        <input type="tel" id="userPhone" name="phone" placeholder="10-digit number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userEmail" class="required">Email Address</label>
+                        <input type="email" id="userEmail" name="email" placeholder="abc@gmail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service" class="required">Choose a service</label>
+                        <select name="services" id="service" required>
+                            <option value="">Select Service</option>
+                            <option value="web-design">Web Design</option>
+                            <option value="marketing">Digital Marketing</option>
+                            <option value="ERP">ERP for College, School, Company</option>
+                            <option value="custom">Custom Development</option>
+                        </select>
+                    </div>
+
+                    <button type="submit">Submit Request</button>
+                </form>
             </div>
-
-            <div class="form-group">
-                <label for="userEmail">Email Address</label>
-                <input type="email" id="userEmail" name="email" placeholder="abc@gmail.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="service">Choose a service:</label>
-                <select name="services" id="service">
-                    <option value="web-design">Web Design</option>
-                    <option value="marketing">Digital Marketing</option>
-                    <option value="ERP">ERP for college, school, Company</option>
-                </select>
-            </div>
-
-            <button type="submit">Submit Request</button>
-        </form>
+        </div>
     </main>
 
     <footer id="contact">
-        Contact us: | +91 87677 09431
-        <p>&copy; MK. Website developed by MNS.</p>
+        <p>Contact us: +91 87677 09431</p>
+        <p>&copy; 2026 MNS. All Rights Reserved.</p>
     </footer>
 
     <script src="scripts.js"></script>
