@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.middleware import SlowAPIMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.core.exceptions import global_exception_handler
 from app.core.rate_limiter import limiter
@@ -15,6 +16,7 @@ app = FastAPI(
     title="MNS Service API",
     version="1.0"
 )
+app.mount("/", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 # Rate limiter setup
 app.state.limiter = limiter
